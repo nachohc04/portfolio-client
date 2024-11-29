@@ -30,7 +30,7 @@ const Navbar = () => {
           <span className="sr-only">Toggle navigation</span>
           <svg
             className={`h-10 w-10 transition-transform duration-200 ${
-              isOpen ? "rotate-90 text-green-900" : "text-white"
+              isOpen ? "rotate-90 text-green-500" : "text-white"
             }`}
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -62,7 +62,7 @@ const Navbar = () => {
               key={item}
               to={`/${item.toLowerCase()}`}
               onClick={() => setIsOpen(false)}
-              className={`block px-4 py-2 text-2xl text-white hover:text-green-900 transform transition-all duration-500 ease-in-out hover:scale-110 md:inline-block md:opacity-100 md:transform-none ${
+              className={`block px-4 py-2 text-2xl text-white hover:text-green-500 transform transition-all duration-500 ease-in-out hover:scale-110 md:inline-block md:opacity-100 md:transform-none ${
                 isOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
               style={{

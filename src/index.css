@@ -12,14 +12,14 @@ body, html {
 }
 
 /* Set the GIF as the background */
-body {
-  background-image: url('japanese-garden-grey.gif'); /* Replace with your GIF path */
-  background-size: cover; /* Scale the GIF to cover the entire viewport */
-  background-position: center; /* Center the GIF */
-  background-repeat: no-repeat; /* Prevent tiling */
-}
+/* body {
+  background-image: url('japanese-garden-grey.gif');
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+} */
 
-/* Content styles to stand out against the GIF */
+/* Content styles to stand out against the GIF
 .content {
   position: relative;
   z-index: 1; 
@@ -31,7 +31,7 @@ body {
 
 
 /* Optional: Add a dark overlay to make the text easier to read */
-body::before {
+/* body::before {
   content: '';
   position: absolute;
   top: 0;
@@ -40,7 +40,7 @@ body::before {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5); 
   z-index: 0; 
-}
+} */ */
 
 body {
   font-family: "Roboto Slab", serif;
