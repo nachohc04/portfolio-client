@@ -29,19 +29,23 @@ const HomePage = () => {
         <p className="text-xl md:text-2xl text-gray-400 mb-6">
           A passionate Software Engineer who builds impactful solutions through clean code and innovative design.
         </p>
-        <div className="space-x-4">
-          <Link
-            to="/about"
-            className="bg-green-500 px-6 py-3 text-lg rounded-lg hover:bg-green-600 transition"
-          >
-            Learn more about me
-          </Link>
-          <Link
-            to="/projects"
-            className="bg-gray-700 px-6 py-3 text-lg rounded-lg hover:bg-gray-600 transition"
-          >
-            View all my projects
-          </Link>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="flex justify-center md:justify-end">
+            <Link
+              to="/about"
+              className="bg-green-500 px-6 py-3 text-lg rounded-lg hover:bg-green-600 transition w-80"
+            >
+              Learn more about me
+            </Link>
+          </div>
+          <div className="flex justify-center md:justify-start">
+            <Link
+              to="/projects"
+              className="bg-gray-700 px-6 py-3 text-lg rounded-lg hover:bg-gray-600 transition w-80"
+            >
+              View all my projects
+            </Link>
+          </div>
         </div>
       </header>
 
