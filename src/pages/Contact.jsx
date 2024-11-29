@@ -9,7 +9,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Alert } from '@/components/ui/alert'; // Import Alert component
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa'; // Import icons
-
+import { Typewriter } from 'react-simple-typewriter';
+  
 const formSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
   email: z.string().email({ message: 'Invalid email address.' }),
@@ -56,7 +57,15 @@ const ContactPage = () => {
           Get In <span className="text-green-500">Touch</span>
         </h1>
         <p className="text-xl md:text-2xl text-gray-400">
-          Have a question, collaboration idea, or just want to say hi? I'd love to hear from you!
+        <Typewriter
+            words={[
+              "          Have a question, collaboration idea, or just want to say hi? I'd love to hear from you!",
+            ]}
+            loop={1}
+            typeSpeed={10}
+            deleteSpeed={30}
+            cursor
+          />
         </p>
       </header>
 

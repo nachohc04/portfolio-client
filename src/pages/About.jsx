@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { Typewriter } from 'react-simple-typewriter';
 
 const AboutPage = () => {
   return (
@@ -9,7 +10,16 @@ const AboutPage = () => {
           About <span className="text-green-500">Me</span>
         </h1>
         <p className="text-xl md:text-2xl text-gray-400">
-          Discover who I am, what I do, and what drives my passion for technology.
+          <Typewriter
+              words={[
+                "Discover who I am, what I do, and what drives my passion for technology.",
+              ]}
+              loop={1}
+              typeSpeed={10}
+              deleteSpeed={30}
+              cursor
+            />
+          
         </p>
       </header>
 
