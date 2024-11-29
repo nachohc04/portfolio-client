@@ -11,26 +11,32 @@ import {
 } from "@/components/ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
 import { Typewriter } from 'react-simple-typewriter';
-
+import Loader from './Loading';
 
 const HomePage = () => {
-
   const [featuredProjects, setFeaturedProjects] = useState([]);
+  const [loading, setLoading] = useState(true); // Add loading state
 
   const fetchFeaturedProjects = useCallback(async () => {
-    const res = await getFeaturedProjects();
-    if (!res) setError("Error getting featured projects")
-    setFeaturedProjects(res)
-
-  }, [featuredProjects, setFeaturedProjects])
+    try {
+      const res = await getFeaturedProjects();
+      setFeaturedProjects(res);
+    } catch {
+      setFeaturedProjects([]); // Handle errors gracefully
+    } finally {
+      setLoading(false); // Stop loading
+    }
+  }, []);
 
   useEffect(() => {
     fetchFeaturedProjects();
-  }, [])
+  }, [fetchFeaturedProjects]);
 
   const plugin = useRef(
     Autoplay({ delay: 5000, stopOnInteraction: true })
   )
+
+  if (loading) return <Loader />
 
   return (
     <div className="h-full pb-10 pt-10 text-white flex flex-col items-center justify-start px-6 overflow-y-auto">

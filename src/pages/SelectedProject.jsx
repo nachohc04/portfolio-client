@@ -1,61 +1,94 @@
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {getProjectById} from "../services/services"
+import { getProjectById } from "../services/services";
+import { Loader } from "lucide-react";
 
 const SelectedProject = () => {
-  const { projectId } = useParams(); // Get projectId from URL
-  const [project, setProject] = useState(null); // State for project data
-  const [loading, setLoading] = useState(true); // Loading state
-  const [error, setError] = useState(null); // Error state
-  
+  const { projectId } = useParams();
+  const [project, setProject] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [isImageModalOpen, setImageModalOpen] = useState(false); // State to manage modal visibility
+
   const apiUrl = import.meta.env.VITE_API_URL;
 
   const fetchProject = useCallback(async () => {
     try {
-        const res = await getProjectById(projectId);
-        if (!res) setError(`Couldn't get project with id ${projectId}`);
-    
+      const res = await getProjectById(projectId);
+      if (!res) {
+        setError(`Couldn't get project with id ${projectId}`);
+      } else {
         setProject(res);
+      }
+    } catch (err) {
+      setError(`Couldn't fetch project with id ${projectId}`);
+    } finally {
+      setLoading(false);
     }
-    catch (err) {
-        setError(`Couldn't fetch project with id ${projectId}`);
-    }
-    finally {
-        setLoading(false);
-    }
-  }, [getProjectById, projectId, setProject, setError, setLoading])
-
+  }, [projectId]);
 
   useEffect(() => {
     fetchProject();
-  }, []);
+  }, [fetchProject]);
 
-  if (loading) return <div className="text-white text-center mt-10">Loading...</div>;
-  if (error) return <div className="text-red-500 text-center mt-10">{error}</div>;
+  // Toggle image modal visibility
+  const toggleImageModal = () => {
+    setImageModalOpen((prevState) => !prevState);
+  };
+
+  if (loading)
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <Loader className="animate-spin text-green-500 w-16 h-16" />
+      </div>
+    );
+
+  if (error)
+    return (
+      <div className="text-red-500 text-center mt-10 text-lg">
+        {error}
+      </div>
+    );
 
   return (
     <div className="min-h-screen text-white p-6 flex flex-col items-center">
-      {/* Project Header */}
-      <h1 className="text-4xl font-bold mb-4">{project.name}</h1>
-      <p className="text-gray-400 text-lg mb-6 text-center max-w-2xl">{project.description}</p>
+      <h1 className="text-4xl font-bold mb-4 text-center">{project.name}</h1>
+      <p className="text-gray-400 text-lg mb-6 text-center max-w-2xl">
+        {project.description}
+      </p>
 
-      {/* Project Image */}
+      {/* Image Section */}
       <div className="w-full max-w-3xl mb-6">
         <img
           src={`${apiUrl}${project.image}`}
           alt={project.name}
-          className="rounded-lg shadow-lg w-full object-cover"
+          className="rounded-lg shadow-2xl transform hover:scale-105 cursor-pointer transition-all duration-300"
+          onClick={toggleImageModal} // Open modal on click
         />
       </div>
 
-      {/* Links */}
-      <div className="flex space-x-6 mb-8">
+      {/* Image Modal */}
+      {isImageModalOpen && (
+        <div
+          className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-70 z-50"
+          onClick={toggleImageModal} // Close modal when clicking outside the image
+        >
+          <img
+            src={`${apiUrl}${project.image}`}
+            alt={project.name}
+            className="max-w-full max-h-screen object-contain sm:max-w-[600px] md:max-w-[800px] lg:max-w-[1000px] rounded-lg shadow-2xl transition-all duration-300 transform hover:scale-105"
+            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking on the image
+          />
+        </div>
+      )}
+
+      <div className="flex flex-wrap justify-center space-x-4 mb-8">
         {project.host_url && (
           <a
             href={project.host_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-green-500 px-4 py-2 rounded-lg hover:bg-green-600 transition"
+            className="bg-green-500 hover:bg-green-600 px-5 py-2 rounded-lg transition"
           >
             Visit Project
           </a>
@@ -65,24 +98,41 @@ const SelectedProject = () => {
             href={project.repository}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition"
+            className="bg-gray-700 hover:bg-gray-800 px-5 py-2 rounded-lg transition"
           >
             View Repository
           </a>
         )}
       </div>
 
-      {/* Collaborators Section */}
-      {project.collaborators && project.collaborators.length > 0 && (
-        <div className="max-w-2xl text-center">
-          <h2 className="text-2xl font-semibold mb-3">Collaborators</h2>
-          <ul className="list-disc list-inside text-gray-400">
+      {project.collaborators?.length > 0 && (
+        <div className="max-w-4xl w-full text-center">
+          <h2 className="text-2xl font-semibold mb-6">Collaborators</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {project.collaborators.map((collaborator, index) => (
-              <li key={index} className="mb-1">
-                {collaborator.name}
-              </li>
+              <div
+                key={index}
+                className="p-5 rounded-lg shadow-md hover:shadow-lg transition bg-gray-800"
+              >
+                <h3 className="text-xl font-bold text-white mb-2">
+                  {collaborator.name}
+                </h3>
+                <p className="text-gray-400 mb-4">
+                  {collaborator.description || "No description available."}
+                </p>
+                {collaborator.repository && (
+                  <a
+                    href={collaborator.repository}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-green-500 hover:text-green-400 transition"
+                  >
+                    View Repository
+                  </a>
+                )}
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       )}
     </div>
