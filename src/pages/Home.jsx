@@ -1,7 +1,15 @@
-import React, { useCallback, useState, useEffect} from 'react';
+import React, { useCallback, useState, useEffect, useRef} from 'react';
 import { Link } from "react-router-dom";
 import {getFeaturedProjects} from '../services/services'
 import FeaturedProjectCard from '@/components/ui/featuredProjectCard';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+import Autoplay from "embla-carousel-autoplay"
 
 const HomePage = () => {
 
@@ -18,6 +26,9 @@ const HomePage = () => {
     fetchFeaturedProjects();
   }, [])
 
+  const plugin = useRef(
+    Autoplay({ delay: 5000, stopOnInteraction: true })
+  )
 
   return (
     <div className="min-h-screen text-white flex flex-col items-center justify-center px-6">
@@ -54,14 +65,47 @@ const HomePage = () => {
         <h2 className="text-3xl font-semibold mb-8 text-center">
           Featured Projects
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {featuredProjects.length === 0 ? <div className='m-auto'>No featured projects</div> : (
             featuredProjects.map((featuredProject, index) => {
               return <FeaturedProjectCard name={featuredProject.name} description={featuredProject.description} image={featuredProject.image} id={featuredProject.id} key={index}/>
             })
           )}
           
+        </div> */}
+
+<Carousel
+  plugins={[plugin.current]}
+  className="relative max-w-full m-auto"
+  onMouseEnter={plugin.current.stop}
+  onMouseLeave={plugin.current.reset}
+>
+  <CarouselContent>
+    {featuredProjects.map((featuredProject, index) => (
+      <CarouselItem key={index} className=" sm:px-4 md:px-8">
+        <div className="w-full max-w-xs sm:max-w-sm md:max-w-md m-auto">
+          <FeaturedProjectCard
+            name={featuredProject.name}
+            description={featuredProject.description}
+            image={featuredProject.image}
+            id={featuredProject.id}
+          />
         </div>
+      </CarouselItem>
+    ))}
+  </CarouselContent>
+
+  {/* Left Arrow */}
+  <div className="absolute top-1/2 left-10 transform -translate-y-1/2 z-10">
+    <CarouselPrevious />
+  </div>
+
+  {/* Right Arrow */}
+  <div className="absolute top-1/2 right-10 transform -translate-y-1/2 z-10">
+    <CarouselNext />
+  </div>
+</Carousel>
+
       </section>
 
       {/* Contact Section */}
