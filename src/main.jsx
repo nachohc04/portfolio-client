@@ -15,9 +15,9 @@ const SelectedProject = lazy(() => import ('./pages/SelectedProject'));
 const Main = () => (
   <Router>
     <Suspense fallback={<>Loading...</>}>
-      <div className="h-screen w-screen flex flex-col bg-zinc-900">
+      <div className="h-screen w-screen flex flex-col bg-zinc-900 ">
         <Navbar />
-        <div className="flex-grow overflow-hidden z-40">
+        <div className="h-full flex-grow z-40 overflow-auto">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
