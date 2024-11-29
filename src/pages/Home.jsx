@@ -10,6 +10,8 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
+import { Typewriter } from 'react-simple-typewriter';
+
 
 const HomePage = () => {
 
@@ -31,14 +33,22 @@ const HomePage = () => {
   )
 
   return (
-    <div className="h-full pb-10 text-white flex flex-col items-center justify-start px-6 overflow-y-auto">
+    <div className="h-full pb-10 pt-10 text-white flex flex-col items-center justify-start px-6 overflow-y-auto">
       {/* Header Section */}
       <header className="w-full max-w-5xl mx-auto text-center">
         <h1 className="text-5xl md:text-6xl font-bold mb-4">
           Hi, I'm <span className="text-green-500">[Ignacio]</span>
         </h1>
-        <p className="text-xl md:text-2xl text-gray-400 mb-6">
-          A passionate Software Engineer who builds impactful solutions through clean code and innovative design.
+        <p className="text-xl md:text-2xl text-gray-400 m-6">
+          <Typewriter
+            words={[
+              "A passionate Software Engineer who builds impactful solutions through clean code and innovative design.",
+            ]}
+            loop={1}
+            typeSpeed={10}
+            deleteSpeed={30}
+            cursor
+          />
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="flex justify-center md:justify-end">
@@ -50,12 +60,12 @@ const HomePage = () => {
             </Link>
           </div>
           <div className="flex justify-center md:justify-start">
-            <Link
+            <button disabled 
               to="/projects"
-              className="bg-gray-700 px-6 py-3 text-lg rounded-lg hover:bg-gray-600 transition w-80"
+              className="bg-gray-700 cursor-not-allowed disabled px-6 py-3 text-lg rounded-lg hover:bg-gray-600 transition w-80"
             >
               View all my projects
-            </Link>
+            </button>
           </div>
         </div>
       </header>
