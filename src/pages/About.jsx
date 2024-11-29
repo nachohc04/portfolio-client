@@ -1,19 +1,25 @@
 import React from 'react';
+import { Link } from "react-router-dom";
+import { Typewriter } from 'react-simple-typewriter';
 
-const About = () => {
+const AboutPage = () => {
   return (
-<<<<<<< Updated upstream
-    <div className="w-full h-full flex flex-col items-center justify-center bg-blue-500">
-      <h1 className="text-4xl font-title">About</h1>
-      <p className="text-lg font-body">Welcome to the About page!</p>
-=======
-    <div className="pb-10 text-white flex flex-col items-center justify-start px-6">
+    <div className="min-h-screen pb-10 text-white flex flex-col items-center justify-start px-6">
       <header className="w-full max-w-5xl mx-auto text-center mt-16">
         <h1 className="text-5xl md:text-6xl font-bold mb-6">
           About <span className="text-green-500">Me</span>
         </h1>
         <p className="text-xl md:text-2xl text-gray-400">
-          Discover who I am, what I do, and what drives my passion for technology.
+          <Typewriter
+              words={[
+                "Discover who I am, what I do, and what drives my passion for technology.",
+              ]}
+              loop={1}
+              typeSpeed={10}
+              deleteSpeed={30}
+              cursor
+            />
+          
         </p>
       </header>
 
@@ -58,9 +64,8 @@ const About = () => {
           Contact Me
         </Link>
       </footer>
->>>>>>> Stashed changes
     </div>
   );
 };
 
-export default About;
+export default AboutPage;
