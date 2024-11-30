@@ -70,7 +70,7 @@ const SelectedProject = () => {
           onClick={toggleImageModal} // Close modal when clicking outside the image
         >
           <img
-            src={`${apiUrl}${project.image}`}
+            src={`${apiUrl}/${project.image}`}
             alt={project.name}
             className="max-w-full max-h-screen object-contain sm:max-w-[600px] md:max-w-[800px] lg:max-w-[1000px] rounded-lg shadow-2xl transition-all duration-300 transform hover:scale-105"
             onClick={(e) => e.stopPropagation()} // Prevent closing when clicking on the image
