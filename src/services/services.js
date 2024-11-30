@@ -3,7 +3,10 @@ const apiUrl = import.meta.env.VITE_API_URL;
 export const getFeaturedProjects = async () => {
     const url = `${apiUrl}/projects?featured=true`
 
-    const res = await fetch(url);
+    const res = await fetch(url, {
+        method: 'GET',
+        mode: 'no-cors',  // Bypass CORS checks
+    });
 
     if (!res.ok){
         throw new Error(`Response status: ${res.status}`)
@@ -17,7 +20,10 @@ export const getFeaturedProjects = async () => {
 export const getProjectById = async (projectId) => {
     const url = `${apiUrl}/projects/${projectId}`
 
-    const res = await fetch(url);
+    const res = await fetch(url, {
+        method: 'GET',
+        mode: 'no-cors',  // Bypass CORS checks
+    });
 
     if (!res.ok){
         throw new Error(`Response status: ${res.status}`)
