@@ -100,18 +100,12 @@ const HomePage = () => {
     {featuredProjects.map((featuredProject, index) => (
       <CarouselItem key={index} className=" sm:px-4 md:px-8">
         <div className="w-full max-w-xs sm:max-w-sm md:max-w-md m-auto">
-        <FeaturedProjectCard
-  name={featuredProject.name}
-  description={featuredProject.description}
-  image={featuredProject.image}
-  id={featuredProject.id}
-  className="h-64 flex flex-col justify-between p-4 bg-gray-800 rounded-lg shadow-lg overflow-hidden"
->
-  <h3 className="text-xl font-bold text-white">{featuredProject.name}</h3>
-  <p className="text-gray-400 overflow-hidden text-ellipsis h-20 whitespace-normal">
-    {featuredProject.description}
-  </p>
-</FeaturedProjectCard>
+          <FeaturedProjectCard
+            name={featuredProject.name}
+            description={featuredProject.description}
+            image={featuredProject.image}
+            id={featuredProject.id}
+          />
         </div>
       </CarouselItem>
     ))}
