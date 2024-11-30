@@ -39,7 +39,7 @@ const HomePage = () => {
   if (loading) return <Loader />
 
   return (
-    <div className="h-full pb-10 pt-10 text-white flex flex-col items-center justify-start px-6 overflow-y-auto">
+    <div className="h-full pb-24 md:pb-10 pt-10 text-white flex flex-col items-center justify-start px-6 overflow-y-auto">
       {/* Header Section */}
       <header className="w-full max-w-5xl mx-auto text-center">
         <h1 className="text-5xl md:text-6xl font-bold mb-4">

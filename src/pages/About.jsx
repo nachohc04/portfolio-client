@@ -4,7 +4,7 @@ import { Typewriter } from 'react-simple-typewriter';
 
 const AboutPage = () => {
   return (
-    <div className="min-h-screen pb-10 text-white flex flex-col items-center justify-start px-6">
+    <div className="min-h-screen pb-24 md:pb-10 text-white flex flex-col items-center justify-start px-6">
       <header className="w-full max-w-5xl mx-auto text-center mt-16">
         <h1 className="text-5xl md:text-6xl font-bold mb-6">
           About <span className="text-green-500">Me</span>

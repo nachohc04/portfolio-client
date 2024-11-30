@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProjectById } from "../services/services";
-import { Loader } from "lucide-react";
+import Loader from "./Loading";
 
 const SelectedProject = () => {
   const { projectId } = useParams();
@@ -36,12 +36,8 @@ const SelectedProject = () => {
     setImageModalOpen((prevState) => !prevState);
   };
 
-  if (loading)
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <Loader className="animate-spin text-green-500 w-16 h-16" />
-      </div>
-    );
+  if (loading) return <Loader />
+
 
   if (error)
     return (
@@ -51,7 +47,7 @@ const SelectedProject = () => {
     );
 
   return (
-    <div className="min-h-screen text-white p-6 flex flex-col items-center">
+    <div className="min-h-screen text-white p-6 flex flex-col items-center pb-24 md:pb-10">
       <h1 className="text-4xl font-bold mb-4 text-center">{project.name}</h1>
       <p className="text-gray-400 text-lg mb-6 text-center max-w-2xl">
         {project.description}

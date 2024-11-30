@@ -51,7 +51,7 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="pb-10 flex flex-col items-center justify-start px-6 text-white">
+    <div className="pb-24 md:pb-10 flex flex-col items-center justify-start px-6 text-white">
       <header className="w-full max-w-5xl mx-auto text-center mt-16">
         <h1 className="text-5xl md:text-6xl font-bold mb-6">
           Get In <span className="text-green-500">Touch</span>
