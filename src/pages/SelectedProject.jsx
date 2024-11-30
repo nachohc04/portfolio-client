@@ -56,7 +56,7 @@ const SelectedProject = () => {
       {/* Image Section */}
       <div className="w-full max-w-3xl mb-6">
         <img
-          src={`${apiUrl}${project.image}`}
+          src={`${apiUrl}/${project.image}`}
           alt={project.name}
           className="rounded-lg shadow-2xl transform hover:scale-105 cursor-pointer transition-all duration-300"
           onClick={toggleImageModal} // Open modal on click
