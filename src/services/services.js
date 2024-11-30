@@ -1,7 +1,7 @@
 const apiUrl = import.meta.env.VITE_API_URL;
 
 export const getFeaturedProjects = async () => {
-    const url = `${apiUrl}/projects/?featured=true`
+    const url = `${apiUrl}/projects?featured=true`
 
     const res = await fetch(url);
 
