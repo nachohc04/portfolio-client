@@ -5,7 +5,7 @@ export const getFeaturedProjects = async () => {
 
     const res = await fetch(url, {
         method: 'GET',
-        credentials: 'include',  // Bypass CORS checks
+        // mode: 'no-cors',  // Bypass CORS checks
     });
 
     if (!res.ok){
@@ -22,7 +22,7 @@ export const getProjectById = async (projectId) => {
 
     const res = await fetch(url, {
         method: 'GET',
-        credentials: 'include',  // Bypass CORS checks
+        // credentials: 'include',  // Bypass CORS checks
     });
 
     if (!res.ok){
